@@ -1,0 +1,41 @@
+<div class="container center">
+<div class="panel panel-primary" style="width: 40rem; margin: 0 auto;">
+    <div class="panel-heading"><h4>Login</h4></div>
+    <div class="panel-body " >
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">  
+     
+        <div class="form-group">
+            <label class="pull-left" for="email">Email</label>
+            <input class="form-control form-control-sm" formControlName="email" type="email">
+            <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            <div class="alert alert-danger" role="alert" *ngIf="loginForm.controls.email.hasError('pattern') && loginForm.controls.email.touched">
+                <p>Please enter valid Email</p>
+            </div>           
+        </div> 
+            <div class="form-group">
+                <label class="pull-left" for="password">Password</label>
+                <input class="form-control form-control-sm" formControlName="password" type="password">
+                <!--<small id="emailHelp" class="form-text text-muted">Inform password at least with 8 lenght.</small>-->
+                <div class="alert alert-danger" role="alert" *ngIf="loginForm.controls.password.hasError('pattern') && loginForm.controls.password.touched">
+                        <p>Password equal or more than 8 caracter</p>
+                    </div>          
+            </div>
+            <div class="form-group"><br /><br />
+                <button text-center [disabled]="!loginForm.valid" class="btn btn-primary">Login</button>
+                <br /><br />
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="showMessage">  
+                    {{mensagemSucesso}}  
+            </div>
+            <div class="alert alert-success" role="alert" *ngIf="!showMessage && mensagemSucesso.lenght > 0 ">  
+                    {{mensagemSucesso}}  
+            </div>
+        
+        </form>
+        <div class="loadWrapper" *ngIf="showProgress">  
+            <div class="loader"></div>  
+        </div>
+        <!--<p>Form value: {{ loginForm.value | json }}</p>-->
+        </div>
+</div>
+</div>
